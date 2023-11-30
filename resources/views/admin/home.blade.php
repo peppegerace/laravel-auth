@@ -2,6 +2,8 @@
 
 @section('content')
 
-<h1>Home Dashboard</h1>
+<div class="container my-3">
+    <h1>Home Dashboard</h1>
+</div>
 
 @endsection
