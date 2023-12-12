@@ -8,19 +8,7 @@ use Illuminate\Support\Str;
 
 class Type extends Model
 {
-    use HasFactory;
-
-    public static function generateSlug($name){
-        $slug = Str::slug($name, "-");
-        $original_slug = $slug;
-        $exists = Type::where("slug", $slug)->first();
-        $c = 1;
-        while($exists){
-            $slug = $original_slug . "-" . $c;
-            $exists = Type::where("slug", $slug)->first();
-
-            $c++;
-        }
-        return $slug;
-    }
+    protected $fillable = [
+        "name", "slug"
+    ];
 }

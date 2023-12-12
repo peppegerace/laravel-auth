@@ -38,15 +38,21 @@
                 <tr>
                     <td>{{ $tecnology->id }}</td>
                     <td>{{ $tecnology->name }}</td>
-                    <td>
-                        <form action="{{ route("admin.tecnologies.destroy", $tecnology->id) }}"
-                            method="POST"
-                            onsubmit="return confirm ('Sei sicuro di voler eliminare questa tecnologia?')">
+                    <form
+                      action="{{ route('admin.tecnologies.update', $tecnology) }}"
+                      method="POST"
+                      id="form-edit">
+                        @csrf
+                        @method('PUT')
+                        {{-- <input type="text" class="form-hidden" value="{{ $tecnology->name }}" name="name" /> --}}
+                    </form>
 
-                            @csrf
-                            @method("DELETE")
-                            <button type="submit" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></button>
-                        </form>
+                    <td>
+                        @include("admin.partials.form-delete",[
+                            "route" => route("admin.tecnologies.destroy", $tecnology),
+                            "message" => "Sei sicuro di voler eliminare questa tecnologia?"
+                        ])
+                        {{-- <button onclick="submitForm()" class="btn btn-warning" id="button-addon2"><i class="fa-solid fa-pencil"></i></button> --}}
                     </td>
                 </tr>
             @endforeach
@@ -54,4 +60,11 @@
     </table>
 
 </div>
+
+<script>
+    function submitForm(){
+        const form = document.getElementById("form-edit");
+        form.submit();
+    }
+</script>
 @endsection
