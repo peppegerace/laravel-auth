@@ -30,8 +30,12 @@
                             <td>{{ $project->name }}</td>
                             <td>{{ $project->description }}</td>
                             <td>{{ $project->project_duration }} giorni</td>
-                            <td>
-                                <a class="btn btn-success" href="{{ route("admin.projects.show", $project) }}"><i class="fa-solid fa-circle-info"></i></a>
+                            <td class="d-flex">
+                                <a class="btn btn-success me-2" href="{{ route("admin.projects.show", $project) }}"><i class="fa-solid fa-circle-info"></i></a>
+                                @include("admin.partials.form-delete",[
+                                    "route" => route("admin.projects.destroy", $project),
+                                    "message" => "Sei sicuro di voler eliminare questo progetto?"
+                                ])
                             </td>
                         </tr>
                     @endforeach
